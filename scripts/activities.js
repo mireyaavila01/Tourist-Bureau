@@ -1,10 +1,10 @@
 "use strict";
 
-let categories = ["Adventures", "Arts & Crafts", "Museums", "Wine Tastings", "Other"];
+let categories = ["Adventurous", "Arts & Crafts", "Museums", "Wine Tastings", "Other"];
 
 let activities = [
    {
-        category: "Adventures", 
+        category: "Adventurous", 
         id: "A101", 
         name: "Valley Hot Air Balloons", 
         description: "Enjoy a lovely hot air balloon ride over the valley at sunrise.  Call 800-555-1212 to reserve a date/time after you complete your e-ticket purchase.", 
@@ -12,7 +12,7 @@ let activities = [
         price: 265.00 
    },
    {
-        category: "Adventures", 
+        category: "Adventurous", 
         id: "A102", 
         name: "River Runners: Float Trip", 
         description: "A mellow float trip with lovely scenery, great fishing, just a few riffles, and it finishes back at our base. It is a perfect trip for those wishing to take their time, or those on a limited schedule.", 
@@ -20,7 +20,7 @@ let activities = [
         price: 65.00 
     },
     {
-        category: "Adventures", 
+        category: "Adventurous", 
         id: "A103", 
         name: "River Runners: Ride the Rapids", 
         description: "Experience 3-4 hours of Class II and III whitewater rafting with breathtaking scenery. It is a fun, thrilling, and memorable adventure that everyone from ages 8 and up can enjoy – no experience necessary!", 
@@ -100,5 +100,220 @@ let activities = [
         price: 0.00 
     }
 ];
+//select ids 
+const activityCategory = document.getElementById("activityCategory");
+const adventurousCategory = document.getElementById("adventurousCategory");
+const artsAndCraftsCategory = document.getElementById("artsAndCraftsCategory");
+const museumsCategory = document.getElementById("museumsCategory");
+const wineTastingCategory = document.getElementById("wineTastingCategory");
+const otherCategory = document.getElementById("otherCategory");
+
+//form ids
+const inputNumberTickets = document.getElementById("inputNumberTickets");
+const inputCreditCard = document.getElementById("inputCreditCard");
+const inputEmailAddress = document.getElementById("inputEmailAddress");
+
+const submitBtn = document.getElementById("submitBtn");
+const resetBtn = document.getElementById("resetBtn");
+//div ids 
+const divAdventurous = document.getElementById("divAdventurous");
+const divArtsAndCrafts = document.getElementById("divArtsAndCrafts");
+const divMuseums = document.getElementById("divMuseums");
+const divWineTasting = document.getElementById("divWineTasting");
+const divOther = document.getElementById("divOther");
+
+const messageWithDetails = document.getElementById("messageWithDetails");
+
+window.onload = function (){
+    activityDropdown();
+    activityCategory.onchange = hideOrShowCategories;
+    hideOrShowCategories()
+    
+    adventurousCategory.onchange = displayDetails;
+    artsAndCraftsCategory.onchange = displayDetails;
+    museumsCategory.onchange = displayDetails;
+    wineTastingCategory.onchange = displayDetails;
+   otherCategory.onchange = displayDetails;
+}
+
+function hideOrShowCategories(){
+    let selectedCategory = activityCategory.value;
+
+    if (selectedCategory === "Adventurous") {
+        divAdventurous.style.display = "block"
+       adventurousDropdown();
+    }
+    else if(selectedCategory === "Arts & Crafts"){
+        divArtsAndCrafts.style.display = "block"
+        artsAndCraftsDropdown();
+    }
+    else if (selectedCategory === "Museums"){
+        divMuseums.style.display = "block"
+        museumsDropdown();
+    }
+    else if (selectedCategory === "Wine Tastings"){
+        divWineTasting.style.display = "block"
+        wineTastingDropdown();
+    }
+    else if (selectedCategory === "Other"){
+        divOther.style.display = "block"
+        otherDropdown();
+    }
+    else{
+        divAdventurous.style.display = "none";
+       divArtsAndCrafts.style.display = "none";
+        divMuseums.style.display = "none" ;
+        divWineTasting.style.display = "none";
+        divOther.style.display = "none";
+    }
+}
+
+function activityDropdown(){
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select One Activity Category"
+    newOption.value = "";
+    activityCategory.appendChild(newOption); 
+
+    for(let i = 0; i < categories.length; i++){
+        let newOption = new Option(categories[i]);
+        activityCategory.appendChild(newOption);
+    }
+}
+
+function adventurousDropdown(){
+   
 
 
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select an Adventurous Activity"
+    newOption.value = "";
+    adventurousCategory.appendChild(newOption); 
+
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].category ==="Adventurous"){
+        let newOption = new Option(activities[i].name);
+        adventurousCategory.appendChild(newOption); 
+        }
+        
+    }
+
+    
+
+}
+
+function artsAndCraftsDropdown(){
+    
+
+
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select an Arts & Crafts Activity"
+    newOption.value = "";
+    artsAndCraftsCategory.appendChild(newOption); 
+
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].category ==="Arts & Crafts"){
+        let newOption = new Option(activities[i].name);
+        artsAndCraftsCategory.appendChild(newOption); 
+        }
+        
+    }
+}
+
+function museumsDropdown(){
+ 
+
+
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select a Musuem Activity"
+    newOption.value = "";
+    museumsCategory.appendChild(newOption); 
+
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].category ==="Museums"){
+        let newOption = new Option(activities[i].name);
+        museumsCategory.appendChild(newOption); 
+        }
+        
+    }
+}
+
+function wineTastingDropdown(){
+   
+
+
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select a Wine Tasting Activity"
+    newOption.value = "";
+    wineTastingCategory.appendChild(newOption); 
+
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].category ==="Wine Tastings"){
+        let newOption = new Option(activities[i].name);
+        wineTastingCategory.appendChild(newOption); 
+        }
+        
+    }
+}
+
+function otherDropdown(){
+    
+
+
+    let newOption = document.createElement("option");
+    newOption.textContent = "Select Other Options for Activities"
+    newOption.value = "";
+    otherCategory.appendChild(newOption); 
+
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].category ==="Other"){
+        let newOption = new Option(activities[i].name);
+        otherCategory.appendChild(newOption); 
+        }
+        
+    }
+}
+
+function displayDetails(){
+    let selectedCategory = activityCategory.value;
+    let selectedName;
+    messageWithDetails.innerHTML = "";
+
+    if (selectedCategory === "Adventurous") {
+        selectedName = adventurousCategory.value;
+    } else if (selectedCategory === "Arts & Crafts") {
+        selectedName = artsAndCraftsCategory.value;
+    } else if (selectedCategory === "Museums") {
+        selectedName = museumsCategory.value;
+    } else if (selectedCategory === "Wine Tastings") {
+        selectedName = wineTastingCategory.value;
+    } else if (selectedCategory === "Other") {
+        selectedName = otherCategory.value;
+    } else {
+    
+        return;
+    }
+   
+    
+    
+    for(let i = 0; i < activities.length; i++){
+        if(activities[i].name === selectedName && activities[i].category === selectedCategory){
+            messageWithDetails.innerHTML = `
+            Description: ${activities[i].description}<br>
+            Location: ${activities[i].location} <br>
+            ID: ${activities[i].id}<br>
+            Price: $${activities[i].price.toFixed(2)}`;
+           return; 
+        }
+       
+    }
+
+
+}
+
+function onSubmitBtn(){
+
+}
+
+function onResetBtn(){
+
+}
