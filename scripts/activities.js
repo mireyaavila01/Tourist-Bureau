@@ -123,12 +123,13 @@ const divWineTasting = document.getElementById("divWineTasting");
 const divOther = document.getElementById("divOther");
 
 const messageWithDetails = document.getElementById("messageWithDetails");
+const messageForTickets = document.getElementById("messageForTickets");
 
 window.onload = function (){
     activityDropdown();
     activityCategory.onchange = hideOrShowCategories;
     hideOrShowCategories()
-    
+
     adventurousCategory.onchange = displayDetails;
     artsAndCraftsCategory.onchange = displayDetails;
     museumsCategory.onchange = displayDetails;
@@ -136,27 +137,48 @@ window.onload = function (){
    otherCategory.onchange = displayDetails;
 }
 
-function hideOrShowCategories(){
+function hideOrShowCategories(){ 
+    messageWithDetails.innerHTML = "";
     let selectedCategory = activityCategory.value;
 
     if (selectedCategory === "Adventurous") {
         divAdventurous.style.display = "block"
+        divArtsAndCrafts.style.display = "none"
+        divMuseums.style.display = "none"
+        divWineTasting.style.display = "none"
+        divOther.style.display = "none"
        adventurousDropdown();
     }
     else if(selectedCategory === "Arts & Crafts"){
         divArtsAndCrafts.style.display = "block"
+        divAdventurous.style.display = "none"
+        divMuseums.style.display = "none"
+        divWineTasting.style.display = "none"
+        divOther.style.display = "none"
         artsAndCraftsDropdown();
     }
     else if (selectedCategory === "Museums"){
         divMuseums.style.display = "block"
+        divAdventurous.style.display = "none"
+        divArtsAndCrafts.style.display = "none"
+        divWineTasting.style.display = "none"
+        divOther.style.display = "none"
         museumsDropdown();
     }
     else if (selectedCategory === "Wine Tastings"){
         divWineTasting.style.display = "block"
+        divAdventurous.style.display = "none"
+        divArtsAndCrafts.style.display = "none"
+        divMuseums.style.display = "none"
+        divOther.style.display = "none"
         wineTastingDropdown();
     }
     else if (selectedCategory === "Other"){
         divOther.style.display = "block"
+        divAdventurous.style.display = "none"
+        divArtsAndCrafts.style.display = "none"
+        divMuseums.style.display = "none"
+        divWineTasting.style.display = "none"
         otherDropdown();
     }
     else{
@@ -169,6 +191,8 @@ function hideOrShowCategories(){
 }
 
 function activityDropdown(){
+   
+
     let newOption = document.createElement("option");
     newOption.textContent = "Select One Activity Category"
     newOption.value = "";
@@ -181,7 +205,7 @@ function activityDropdown(){
 }
 
 function adventurousDropdown(){
-   
+   adventurousCategory.innerHTML = "";
 
 
     let newOption = document.createElement("option");
@@ -202,7 +226,7 @@ function adventurousDropdown(){
 }
 
 function artsAndCraftsDropdown(){
-    
+    artsAndCraftsCategory.innerHTML = "";
 
 
     let newOption = document.createElement("option");
@@ -220,7 +244,7 @@ function artsAndCraftsDropdown(){
 }
 
 function museumsDropdown(){
- 
+    museumsCategory.innerHTML = "";
 
 
     let newOption = document.createElement("option");
@@ -238,7 +262,7 @@ function museumsDropdown(){
 }
 
 function wineTastingDropdown(){
-   
+   wineTastingCategory.innerHTML = "";
 
 
     let newOption = document.createElement("option");
@@ -256,7 +280,7 @@ function wineTastingDropdown(){
 }
 
 function otherDropdown(){
-    
+    otherCategory.innerHTML = "";
 
 
     let newOption = document.createElement("option");
@@ -274,9 +298,10 @@ function otherDropdown(){
 }
 
 function displayDetails(){
+    console.log("display");
     let selectedCategory = activityCategory.value;
     let selectedName;
-    messageWithDetails.innerHTML = "";
+    
 
     if (selectedCategory === "Adventurous") {
         selectedName = adventurousCategory.value;
@@ -294,7 +319,7 @@ function displayDetails(){
     }
    
     
-    
+    if(selectedName){
     for(let i = 0; i < activities.length; i++){
         if(activities[i].name === selectedName && activities[i].category === selectedCategory){
             messageWithDetails.innerHTML = `
@@ -307,11 +332,12 @@ function displayDetails(){
        
     }
 
-
+}
+messageWithDetails.innerHTML = "";
 }
 
 function onSubmitBtn(){
-
+    
 }
 
 function onResetBtn(){
